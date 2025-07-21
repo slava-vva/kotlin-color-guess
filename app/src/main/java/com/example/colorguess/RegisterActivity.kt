@@ -17,7 +17,7 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.registerButton.setOnClickListener {
             val name = binding.nameInput.text.toString()
-            val email = binding.emailInput.text.toString()
+            val email = binding.emailInput.text.toString().lowercase()
             val password = binding.passwordInput.text.toString()
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 val db = DatabaseHelper(this)

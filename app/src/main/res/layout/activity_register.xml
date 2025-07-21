@@ -3,35 +3,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:alpha="1"
-    android:background="@drawable/wall_image"
+    android:background="#9E9C9C"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="40dp">
 
     <EditText
         android:id="@+id/nameInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name" />
+        android:layout_marginBottom="10dp"
+        android:background="@color/txt_box_bg_color"
+        android:hint="Name"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/emailInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email" />
+        android:layout_marginBottom="10dp"
+        android:background="@color/txt_box_bg_color"
+        android:hint="Email"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/passwordInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:autofillHints=""
+        android:background="@color/txt_box_bg_color"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#006FFF"
         android:text="Register" />
 
     <TextView

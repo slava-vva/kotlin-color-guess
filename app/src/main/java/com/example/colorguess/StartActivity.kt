@@ -29,7 +29,15 @@ class StartActivity : AppCompatActivity() {
 
         // Skip login and go directly to game
         binding.playButton.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, GameActivity::class.java))
+        }
+
+        binding.textView.setOnClickListener {
+            startActivity(Intent(this, GameActivity::class.java))
+        }
+
+        binding.btnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 }

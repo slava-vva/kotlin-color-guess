@@ -1,15 +1,19 @@
 package com.example.colorguess
 
-
 import android.graphics.Color
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.example.colorguess.databinding.ActivityMainBinding
-import kotlin.random.Random
+import com.example.colorguess.databinding.FragmentGame1Binding
+import kotlin.toString
 
-class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+class GameFragment1 : Fragment() {
+
+    private lateinit var binding: FragmentGame1Binding
 
     private val colorMap = mapOf(
         "Red" to Color.RED,
@@ -22,13 +26,21 @@ class MainActivity : AppCompatActivity() {
 
     private var correctColorName: String = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding = FragmentGame1Binding.inflate(inflater, container, false)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        return binding.root
+
+        // Inflate the layout for this fragment
+        //return inflater.inflate(R.layout.fragment_game1, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setupNewRound()
 
@@ -46,13 +58,10 @@ class MainActivity : AppCompatActivity() {
                 }, 1000)
             }
         }
-
-        binding.btnBack.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
     }
 
     private fun setupNewRound() {
+
         val colorNames = colorMap.keys.shuffled()
         correctColorName = colorNames[0]
         val options = colorNames.take(3).shuffled()
