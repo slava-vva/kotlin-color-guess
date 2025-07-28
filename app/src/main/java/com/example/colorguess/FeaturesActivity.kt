@@ -29,6 +29,10 @@ class FeaturesActivity : AppCompatActivity() {
             insets
         }
 
+        binding.btnPlayVideo.setOnClickListener {
+            startActivity(Intent(this, PlayVideoActivity ::class.java))
+        }
+
         binding.imageButtonPick.setOnClickListener {
             startActivity(Intent(this, PickImagesActivity ::class.java))
         }

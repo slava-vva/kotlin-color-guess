@@ -49,5 +49,6 @@
     <string name="title_activity_google_maps">GoogleMapsActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="work_with_databases">Work with DataBases</string>
 
 </resources>

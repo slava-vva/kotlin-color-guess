@@ -24,15 +24,16 @@
         android:id="@+id/rootLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="#F6EDED"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textWelcome"
+        app:layout_constraintTop_toBottomOf="@+id/textLevel1"
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
@@ -41,8 +42,8 @@
             android:layout_height="240dp"
             android:layout_gravity="center"
             android:layout_marginBottom="20sp"
-            android:src="@drawable/circle_shape"
             android:scaleType="fitXY"
+            android:src="@drawable/circle_shape"
 
             />
 
@@ -71,7 +72,8 @@
             android:id="@+id/resultText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="20sp"
             android:text=""
             android:textSize="18sp" />
 
@@ -102,21 +104,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnBack" />
-
-    <TextView
-        android:id="@+id/textWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="casual"
-        android:text="Wellcome!"
-        android:textColor="#2196F3"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textLevel1" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
