@@ -48,9 +48,6 @@ class GameLevel_1 : AppCompatActivity() {
         userName = prefs.getString("user_name", "Guest") ?: "Guest"
         dbHelper = DatabaseHelper(this)
 
-        val welcomeText = binding.textWelcome
-        welcomeText.text = "Welcome, $userName!"
-
         setupNewRound()
 
         val buttons = listOf(binding.button1, binding.button2, binding.button3)
