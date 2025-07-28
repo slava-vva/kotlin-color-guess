@@ -1,10 +1,13 @@
 package com.example.colorguess
 
 import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.colorguess.databinding.ActivityGameBinding
@@ -56,6 +59,7 @@ class GameLevel_1 : AppCompatActivity() {
             button.setOnClickListener {
                 val guess = button.text.toString()
                 attemptCount++
+                binding.progressBar.progress = attemptCount
 
                 if (guess == correctColorName) {
                     score += 1
@@ -103,7 +107,32 @@ class GameLevel_1 : AppCompatActivity() {
         correctColorName = colorNames[0]
         val options = colorNames.take(3).shuffled()
 
-        binding.colorView.setBackgroundColor(colorMap[correctColorName] ?: Color.GRAY)
+        val shapeTypes = listOf("circle", "square", "triangle", "star")
+        val selectedShape = shapeTypes.random()
+        val selectedColor = colorMap[correctColorName] ?: Color.GRAY
+
+        when (selectedShape) {
+            "circle" -> {
+                val drawable = ContextCompat.getDrawable(this, R.drawable.circle_shape)!!.mutate()
+                (drawable as GradientDrawable).setColor(selectedColor)
+                binding.shapeView.setImageDrawable(drawable)
+            }
+            "square" -> {
+                val drawable = ContextCompat.getDrawable(this, R.drawable.square_shape)!!.mutate()
+                (drawable as GradientDrawable).setColor(selectedColor)
+                binding.shapeView.setImageDrawable(drawable)
+            }
+            "triangle" -> {
+                val drawable = ContextCompat.getDrawable(this, R.drawable.triangle_shape)!!.mutate()
+                drawable.setColorFilter(selectedColor, PorterDuff.Mode.SRC_IN)
+                binding.shapeView.setImageDrawable(drawable)
+            }
+            "star" -> {
+                val drawable = ContextCompat.getDrawable(this, R.drawable.star_shape)!!.mutate()
+                drawable.setColorFilter(selectedColor, PorterDuff.Mode.SRC_IN)
+                binding.shapeView.setImageDrawable(drawable)
+            }
+        }
 
         binding.button1.text = options[0]
         binding.button2.text = options[1]
