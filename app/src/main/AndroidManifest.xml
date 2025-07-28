@@ -25,13 +25,13 @@
         tools:ignore="HardcodedDebugMode"
         tools:targetApi="31">
         <activity
+            android:name=".GameLevel_1"
+            android:exported="false" />
+        <activity
             android:name=".ControlsActivity"
             android:exported="false" />
         <activity
             android:name=".ListViewActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ColorCountActivity"
             android:exported="false" />
         <activity
             android:name=".EmailActivity"
@@ -59,6 +59,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyANgQC2lYCwa-RKbYqZq0a-eFS4RBIiwv0" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity
             android:name=".GoogleMapsActivity"
@@ -76,10 +79,6 @@
         <activity
             android:name=".SelectorActivity"
             android:exported="false" />
-
-
-
-
         <activity
             android:name=".SplashActivity"
             android:exported="true">

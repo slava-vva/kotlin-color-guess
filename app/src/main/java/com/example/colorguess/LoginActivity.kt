@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.colorguess.databinding.ActivityLoginBinding
+import androidx.core.content.edit
 
 class LoginActivity : AppCompatActivity() {
 
@@ -23,17 +24,20 @@ class LoginActivity : AppCompatActivity() {
             val db = DatabaseHelper(this)
             val valid = db.loginUser(email, password)
             if (valid) {
+                val userName = db.getUserNameByEmail(email)
+
+                // Save to SharedPreferences
+                val prefs = getSharedPreferences("UserSession", MODE_PRIVATE)
+                prefs.edit {
+                    putString("user_name", userName)
+                }
+
                 Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, MainActivity::class.java))
             } else {
                 Toast.makeText(this, "Wrong credentials", Toast.LENGTH_SHORT).show()
             }
-//            if (email == "test@test.com" && password == "1234") {
-//                startActivity(Intent(this, MainActivity::class.java))
-//                finish()
-//            } else {
-//                Toast.makeText(this, "Wrong credentials", Toast.LENGTH_SHORT).show()
-//            }
+
         }
 
         binding.goToRegister.setOnClickListener {

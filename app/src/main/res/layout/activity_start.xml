@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="100sp"
+            android:layout_marginBottom="50sp"
             android:background="#941EE9"
             android:rotation="-5"
             android:rotationY="0"
@@ -68,13 +68,17 @@
             android:backgroundTint="#006FFF"
             android:text="Login" />
 
-        <Button
-            android:id="@+id/registerButton"
+        <TextView
+            android:id="@+id/textRegisterLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="#006FFF"
-            android:text="Register" />
+            android:text="If you don't have an account, Register"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold"
+            android:autoLink="none"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="16dp" />
 
     </LinearLayout>
 

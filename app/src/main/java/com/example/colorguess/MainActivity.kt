@@ -1,8 +1,11 @@
 package com.example.colorguess
 
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.colorguess.databinding.ActivityMainBinding
 import kotlin.random.Random
@@ -10,17 +13,10 @@ import kotlin.random.Random
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var db: DatabaseHelper
+    private var userName: String = "Guest"
 
-    private val colorMap = mapOf(
-        "Red" to Color.RED,
-        "Green" to Color.GREEN,
-        "Blue" to Color.BLUE,
-        "Yellow" to Color.YELLOW,
-        "Cyan" to Color.CYAN,
-        "Magenta" to Color.MAGENTA
-    )
-
-    private var correctColorName: String = ""
+    private lateinit var gameLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,21 +26,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupNewRound()
+        val prefs = getSharedPreferences("UserSession", MODE_PRIVATE)
+        userName = prefs.getString("user_name", "Guest") ?: "Guest"
+        db = DatabaseHelper(this)
 
-        val buttons = listOf(binding.button1, binding.button2, binding.button3)
-        buttons.forEach { button ->
-            button.setOnClickListener {
-                val guess = button.text.toString()
-                if (guess == correctColorName) {
-                    binding.resultText.text = "🎉 Correct!"
-                } else {
-                    binding.resultText.text = "❌ Try again!"
-                }
-                binding.resultText.postDelayed({
-                    setupNewRound()
-                }, 1000)
-            }
+        val welcomeText = binding.textWelcome
+        welcomeText.text = "Welcome, $userName!"
+
+        var score_level1 = db.getUserScore(userName);
+        gameLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            score_level1 = db.getUserScore(userName);
+            binding.textScoreLevel1.text = "Level 1: $score_level1/5"
+        }
+        binding.textScoreLevel1.text = "Level 1: $score_level1/5"
+
+        binding.buttonLevel1.setOnClickListener {
+            //startActivity(Intent(this, GameLevel_1::class.java))
+            val intent = Intent(this, GameLevel_1::class.java)
+            gameLauncher.launch(intent)
         }
 
         binding.btnBack.setOnClickListener {
@@ -52,18 +51,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupNewRound() {
-        val colorNames = colorMap.keys.shuffled()
-        correctColorName = colorNames[0]
-        val options = colorNames.take(3).shuffled()
 
-        binding.colorView.setBackgroundColor(colorMap[correctColorName] ?: Color.GRAY)
-
-        binding.button1.text = options[0]
-        binding.button2.text = options[1]
-        binding.button3.text = options[2]
-
-        binding.resultText.text = ""
-    }
 
 }
