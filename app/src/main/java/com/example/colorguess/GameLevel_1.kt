@@ -66,6 +66,7 @@ class GameLevel_1 : AppCompatActivity() {
                 }
 
                 if (attemptCount >= maxAttempts) {
+                    dbHelper.updateUserScore(userName, "score", score)
                     showGameOverDialog()
                 } else {
                     binding.resultText.postDelayed({
@@ -81,7 +82,6 @@ class GameLevel_1 : AppCompatActivity() {
     }
 
     private fun showGameOverDialog() {
-        dbHelper.updateUserScore(userName, score)
 
         val dialogBuilder = AlertDialog.Builder(this)
         dialogBuilder.setTitle("🎉 Congratulations!")

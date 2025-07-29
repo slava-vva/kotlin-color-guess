@@ -7,8 +7,10 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import kotlin.compareTo
 
+data class UserScore(val score1: Int, val score2: Int, val score3: Int)
+
 class DatabaseHelper(context: Context) :
-    SQLiteOpenHelper(context, "ColorGameDB", null, 1) {
+    SQLiteOpenHelper(context, "ColorGameDB", null, 2) {
 
     override fun onCreate(db: SQLiteDatabase) {
         val createTable = """
@@ -17,7 +19,9 @@ class DatabaseHelper(context: Context) :
                 name TEXT unique,
                 email TEXT UNIQUE,
                 password TEXT,
-                score INTEGER DEFAULT 0
+                score INTEGER DEFAULT 0,
+                score2 INTEGER DEFAULT 0,
+                score3 INTEGER DEFAULT 0
             )
         """.trimIndent()
         db.execSQL(createTable)
@@ -60,10 +64,10 @@ class DatabaseHelper(context: Context) :
         return name
     }
 
-    fun updateUserScore(name: String, score: Int): Boolean {
+    fun updateUserScore(name: String, fieldname: String, score: Int): Boolean {
         val db = writableDatabase
         val values = ContentValues()
-        values.put("score", score)
+        values.put(fieldname, score)
         val result = db.update("users", values, "name = ?", arrayOf(name))
         db.close()
         return result > 0
@@ -98,11 +102,19 @@ class DatabaseHelper(context: Context) :
         db.update("users", values, "email = ?", arrayOf(email))
     }
 
-    fun getUserScore(userName: String): Int {
+    fun getUserScore(userName: String): UserScore {
         val db = readableDatabase
-        val cursor = db.rawQuery("SELECT score FROM users WHERE name = ?", arrayOf(userName))
-        val score = if (cursor.moveToFirst()) cursor.getInt(0) else 0
+        val cursor = db.rawQuery("SELECT score, score2, score3 FROM users WHERE name = ?", arrayOf(userName))
+        val scores = if (cursor.moveToFirst()) {
+            UserScore(
+                score1 = cursor.getInt(0),
+                score2 = cursor.getInt(1),
+                score3 = cursor.getInt(2)
+            )
+        } else {
+            UserScore(0, 0, 0)
+        }
         cursor.close()
-        return score
+        return scores
     }
 }

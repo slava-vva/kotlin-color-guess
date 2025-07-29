@@ -36,6 +36,10 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         binding.goToLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
