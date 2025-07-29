@@ -37,14 +37,22 @@ class MainActivity : AppCompatActivity() {
         userScore = db.getUserScore(userName);
 
         var score_level1 = userScore.score1;
+        var score_level2 = userScore.score2;
+        var score_level3 = userScore.score3;
 
         gameLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             userScore = db.getUserScore(userName);
             score_level1 = userScore.score1;
             binding.textScoreLevel1.text = "Level 1: $score_level1/5"
+            score_level2 = userScore.score2;
+            binding.textScoreLevel2.text = "Level 2: $score_level2/5"
+            score_level3 = userScore.score3;
+            binding.textScoreLevel3.text = "Level 3: $score_level3/5"
         }
 
         binding.textScoreLevel1.text = "Level 1: $score_level1/5"
+        binding.textScoreLevel2.text = "Level 2: $score_level2/5"
+        binding.textScoreLevel3.text = "Level 3: $score_level3/5"
 
         binding.buttonLevel1.setOnClickListener {
             //startActivity(Intent(this, GameLevel_1::class.java))
@@ -53,7 +61,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.buttonLevel2.setOnClickListener {
-            startActivity(Intent(this, GameLevel_2::class.java))
+            //startActivity(Intent(this, GameLevel_2::class.java))
+            val intent = Intent(this, GameLevel_2::class.java)
+            gameLauncher.launch(intent)
+
+        }
+
+        binding.buttonLevel3.setOnClickListener {
+            val intent = Intent(this, GameLevel_3::class.java)
+            gameLauncher.launch(intent)
+
         }
 
         binding.btnBack.setOnClickListener {

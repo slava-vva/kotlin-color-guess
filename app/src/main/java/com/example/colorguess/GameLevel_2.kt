@@ -6,22 +6,37 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.GridLayout
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class GameLevel_2 : AppCompatActivity() {
     private lateinit var gridLayout: GridLayout
+    private lateinit var progressBar: ProgressBar
     private val gridSize = 4
     private val totalSquares = gridSize * gridSize
+
+    private lateinit var db : DatabaseHelper
+    private var userName : String = "Guest"
+    private var attemptCount = 0
+    private val maxAttempts = 5
+    private var score = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_level2)
 
+        val prefs = getSharedPreferences("UserSession", MODE_PRIVATE)
+        userName = prefs.getString("user_name", "Guest") ?: "Guest"
+        db = DatabaseHelper(this)
+
         gridLayout = findViewById(R.id.gridLayout)
+        progressBar = findViewById<ProgressBar>(R.id.progressBar)
+
         setupGrid()
 
         val btnBack = findViewById<Button>(R.id.btnBack)
@@ -50,17 +65,45 @@ class GameLevel_2 : AppCompatActivity() {
             square.layoutParams = ViewGroup.LayoutParams(150, 150)
             square.setBackgroundColor(if (i == differentSquareIndex) differentColor else baseColor)
 
+
             square.setOnClickListener {
                 if (i == differentSquareIndex) {
                     Toast.makeText(this, "🎯 Correct!", Toast.LENGTH_SHORT).show()
-                    setupGrid() // Next round
+                    score++
+
                 } else {
                     Toast.makeText(this, "❌ Try Again!", Toast.LENGTH_SHORT).show()
+                }
+                attemptCount++
+                progressBar.progress = attemptCount
+                if (attemptCount >= maxAttempts) {
+                    db.updateUserScore(userName, "score2", score)
+                    showGameOverDialog()
+                } else {
+                    setupGrid() // Next round
                 }
             }
 
             gridLayout.addView(square)
         }
+    }
+
+    private fun showGameOverDialog() {
+
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setTitle("🎉 Congratulations!")
+        dialogBuilder.setMessage("Your score is $score.\nPlay again or go to next level?")
+        dialogBuilder.setCancelable(false)
+        dialogBuilder.setPositiveButton("Play Again") { _, _ ->
+            attemptCount = 0
+            score = 0
+            setupGrid() // Next round
+        }
+        dialogBuilder.setNegativeButton("Next Level") { _, _ ->
+            // TODO: Go to next level
+            finish()
+        }
+        dialogBuilder.show()
     }
 
     // Lighten or darken a color by a factor
