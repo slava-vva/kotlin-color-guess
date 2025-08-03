@@ -43,9 +43,12 @@ android {
 }
 
 dependencies {
+    implementation("com.google.code.gson:gson:2.8.9")
     implementation(platform("com.google.firebase:firebase-bom:33.15.0"))
     implementation("com.firebaseui:firebase-ui-auth:9.0.0")
     implementation("com.google.firebase:firebase-auth")
+    implementation("net.sourceforge.jtds:jtds:1.3.1")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

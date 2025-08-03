@@ -39,5 +39,9 @@ class SelectorActivity : AppCompatActivity() {
             startActivity(Intent(this, WidgetsActivity ::class.java))
         }
 
+        binding.buttonDatabases.setOnClickListener {
+            startActivity(Intent(this, SelectorSqlActivity ::class.java))
+        }
+
     }
 }
