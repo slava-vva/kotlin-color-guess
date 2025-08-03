@@ -58,7 +58,7 @@
 
         <EditText
             android:id="@+id/userInput"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Enter the number you see"
