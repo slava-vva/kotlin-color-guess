@@ -34,6 +34,11 @@ class GameLevel_3 : AppCompatActivity() {
         Pair(R.drawable.plate_74, "74"),
         Pair(R.drawable.plate_6, "6"),
         Pair(R.drawable.plate_45, "45"),
+        Pair(R.drawable.img26, "26"),
+        Pair(R.drawable.img29, "29"),
+        Pair(R.drawable.img37, "37"),
+        Pair(R.drawable.img45, "45"),
+        Pair(R.drawable.img74, "74"),
     )
 
     private var currentIndex = 0
@@ -101,7 +106,7 @@ class GameLevel_3 : AppCompatActivity() {
     }
 
     private fun loadTestImage() {
-        currentIndex = (0..6).random()
+        currentIndex = (0..11).random()
         val imgResId = testItems[currentIndex].first
         imageView.setImageResource(imgResId)
     }
