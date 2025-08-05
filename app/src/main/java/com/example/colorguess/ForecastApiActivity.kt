@@ -42,6 +42,7 @@ class ForecastApiActivity : AppCompatActivity() {
     private fun fetchTemperatureData(): Thread {
         return Thread {
             val url = URL("http://10.0.2.2:8083/WeatherForecast")
+//            val url = URL("http://10.62.3.20:8083/WeatherForecast")
 
             val connection  = url.openConnection() as HttpURLConnection
             if(connection?.responseCode == 200)

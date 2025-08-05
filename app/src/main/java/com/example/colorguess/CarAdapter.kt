@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-data class Car(val id: Int, val make: String, val model: String, val year: Int)
+data class Car(val id: Int, val brand: String, val model: String, val year: Int)
 
 class CarAdapter(
     private var carList: List<Car>,
@@ -28,7 +28,7 @@ class CarAdapter(
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
         val car = carList[position]
-        holder.textMake.text = car.make
+        holder.textMake.text = car.brand
         holder.textModel.text = car.model
         holder.textYear.text = car.year.toString()
 

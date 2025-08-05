@@ -52,7 +52,7 @@ object CarsRepository {
                 list.add(
                     Car(
                         id = rs.getInt("Id"),
-                        make = rs.getString("Make"),
+                        brand = rs.getString("Make"),
                         model = rs.getString("Model"),
                         year = rs.getInt("Year")
                     )
@@ -72,7 +72,7 @@ object CarsRepository {
         val conn = dbHelper.dbConn()
         try {
             val ps = conn?.prepareStatement("INSERT INTO Cars (Make, Model, Year) VALUES (?, ?, ?)")
-            ps?.setString(1, car.make)
+            ps?.setString(1, car.brand)
             ps?.setString(2, car.model)
             ps?.setInt(3, car.year)
             ps?.executeUpdate()
@@ -88,7 +88,7 @@ object CarsRepository {
         val conn = dbHelper.dbConn()
         try {
             val ps = conn?.prepareStatement("UPDATE Cars SET Make = ?, Model = ?, Year = ? WHERE Id = ?")
-            ps?.setString(1, car.make)
+            ps?.setString(1, car.brand)
             ps?.setString(2, car.model)
             ps?.setInt(3, car.year)
             ps?.setInt(4, car.id)

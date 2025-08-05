@@ -34,16 +34,14 @@ class SelectorSqlActivity : AppCompatActivity() {
         }
 
         binding.buttonMongo.setOnClickListener {
-            startActivity(Intent(this, PlayVideoActivity ::class.java))
+            startActivity(Intent(this, MongoDbApiActivity ::class.java))
         }
 
         binding.buttonAPI.setOnClickListener {
             startActivity(Intent(this, ForecastApiActivity ::class.java))
         }
 
-        binding.buttonAPISQL.setOnClickListener {
-            startActivity(Intent(this, PlayVideoActivity ::class.java))
-        }
+
 
     }
 }

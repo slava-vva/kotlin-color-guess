@@ -26,7 +26,7 @@ class UsingMsSqlActivty : AppCompatActivity() {
 
         adapter = CarAdapter(carList) { car ->
             selectedCar = car
-            binding.editMake.setText(car.make)
+            binding.editMake.setText(car.brand)
             binding.editModel.setText(car.model)
             binding.editYear.setText(car.year.toString())
         }
@@ -37,6 +37,10 @@ class UsingMsSqlActivty : AppCompatActivity() {
         binding.btnAdd.setOnClickListener { addCar() }
         binding.btnUpdate.setOnClickListener { updateCar() }
         binding.btnDelete.setOnClickListener { deleteCar() }
+
+        binding.btnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         loadCars()
     }
@@ -63,7 +67,7 @@ class UsingMsSqlActivty : AppCompatActivity() {
         }
 
         Thread {
-            val newCar = Car(id = 0, make = make, model = model, year = year)
+            val newCar = Car(id = 0, brand = make, model = model, year = year)
             CarsRepository.insert(newCar)
             runOnUiThread {
                 clearInputs()
@@ -84,7 +88,7 @@ class UsingMsSqlActivty : AppCompatActivity() {
         }
 
         Thread {
-            val newCar = Car(id = 0, make = make, model = model, year = year)
+            val newCar = Car(id = 0, brand = make, model = model, year = year)
             CarsRepository.update(newCar)
             runOnUiThread {
                 clearInputs()

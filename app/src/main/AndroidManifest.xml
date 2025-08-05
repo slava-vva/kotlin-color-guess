@@ -29,6 +29,9 @@
         tools:ignore="HardcodedDebugMode"
         tools:targetApi="31">
         <activity
+            android:name=".MongoDbApiActivity"
+            android:exported="false" />
+        <activity
             android:name=".UsingMsSqlActivty"
             android:exported="false" />
         <activity

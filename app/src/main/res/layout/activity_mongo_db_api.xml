@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UsingMsSqlActivty">
+    tools:context=".MongoDbApiActivity">
 
     <Button
         android:id="@+id/btnBack"
@@ -20,20 +20,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBack"
+        app:layout_constraintVertical_bias="0.028"
         tools:layout_editor_absoluteX="0dp">
 
         <EditText
-            android:id="@+id/editMake"
+            android:id="@+id/editBrand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Make" />
+            android:hint="Brand" />
 
         <EditText
             android:id="@+id/editModel"
@@ -49,40 +50,39 @@
             android:inputType="number" />
 
         <LinearLayout
+            android:id="@+id/lnrButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnAdd"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="#000FFF"
-                android:text="Add" />
+                android:backgroundTint="#006FFF"
+                android:text="Add Car" />
 
             <Button
-                android:id="@+id/btnUpdate"
-                android:layout_width="0dp"
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="#000FFF"
-                android:text="Update" />
+                android:backgroundTint="#006FFF"
+                android:text="Save Car" />
 
             <Button
-                android:id="@+id/btnDelete"
-                android:layout_width="0dp"
+                android:id="@+id/btnLoad"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="#000FFF"
-                android:text="Delete" />
+                android:backgroundTint="#006FFF"
+                android:text="Load Cars" />
+
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="match_parent"
+            android:backgroundTint="#006FFF" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
