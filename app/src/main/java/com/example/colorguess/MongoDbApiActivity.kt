@@ -19,7 +19,7 @@ class MongoDbApiActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMongoDbApiBinding
     private lateinit var adapter: MongoCarAdapter
     private val carList = mutableListOf<MongoCar>()
-
+    private lateinit var idCar: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +39,11 @@ class MongoDbApiActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
 
         binding.btnAdd.setOnClickListener { addCar() }
+
+        binding.btnSave.setOnClickListener {
+            updateCar();
+
+        }
 
         binding.btnLoad.setOnClickListener { loadCars() }
 
@@ -88,6 +93,26 @@ class MongoDbApiActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateCar() {
+        val brand = binding.editBrand.text.toString()
+        val model = binding.editModel.text.toString()
+        val year = binding.editYear.text.toString().toIntOrNull() ?: return
+
+        val car = MongoCar(brand = brand, model = model, year = year)
+
+        println("fn updateCar idCar=${idCar}")
+        idCar.let {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    CarRepository.updateCar(idCar, car)
+                    loadCars()
+                } catch (e: Exception) {
+                    showToast("Delete Error: ${e.message}")
+                }
+            }
+        }
+    }
+
     private fun deleteCar(car: MongoCar) {
         car.id?.let {
             CoroutineScope(Dispatchers.IO).launch {
@@ -102,6 +127,7 @@ class MongoDbApiActivity : AppCompatActivity() {
     }
 
     private fun fillForm(car: MongoCar) {
+        idCar = car.id!!
         binding.editBrand.setText(car.brand)
         binding.editModel.setText(car.model)
         binding.editYear.setText(car.year.toString())
